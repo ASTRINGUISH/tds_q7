@@ -1,0 +1,23 @@
+name: Daily Commit
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs once a day at midnight UTC
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Make daily commit by 23f2004941@ds.study.iitm.ac.in
+      run: |
+        echo "Daily commit by 23f2004941@ds.study.iitm.ac.in" >> daily_commit.txt
+        git add daily_commit.txt # Make sure you're adding the correct file here
+        git commit -m "Daily commit"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
